@@ -1,0 +1,403 @@
+{
+  "name": "Adam",
+  "children": [
+    {
+      "name": "Seth",
+      "children": [
+        {
+          "name": "Enosh",
+          "children": [
+            {
+              "name": "Kenan",
+              "children": [
+                {
+                  "name": "Mahalalel",
+                  "children": [
+                    {
+                      "name": "Jared",
+                      "children": [
+                        {
+                          "name": "Enoch",
+                          "children": [
+                            {
+                              "name": "Methuselah",
+                              "children": [
+                                {
+                                  "name": "Lamech",
+                                  "children": [
+                                    {
+                                      "name": "Noah",
+                                      "children": [
+                                        {
+                                          "name": "Shem",
+                                          "children": [
+                                            {
+                                              "name": "Arphaxad",
+                                              "children": [
+                                                {
+                                                  "name": "Shelah",
+                                                  "children": [
+                                                    {
+                                                      "name": "Eber",
+                                                      "children": [
+                                                        {
+                                                          "name": "Peleg",
+                                                          "children": [
+                                                            {
+                                                              "name": "Reu",
+                                                              "children": [
+                                                                {
+                                                                  "name": "Serug",
+                                                                  "children": [
+                                                                    {
+                                                                      "name": "Nahor",
+                                                                      "children": [
+                                                                        {
+                                                                          "name": "Terah",
+                                                                          "children": [
+                                                                            {
+                                                                              "name": "Abram (Abraham)",
+                                                                              "children": [
+                                                                                {
+                                                                                  "name": "Isaac",
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "name": "Jacob (Israel)",
+                                                                                      "children": [
+                                                                                        { "name": "Reuben" },
+                                                                                        { "name": "Simeon" },
+                                                                                        { "name": "Levi",
+                                                                                          "children": [
+                                                                                            { "name": "Kohath",
+                                                                                              "children": [
+                                                                                                { "name": "Amram",
+                                                                                                  "children": [
+                                                                                                    { "name": "Moses" },
+                                                                                                    { "name": "Aaron",
+                                                                                                      "children": [
+                                                                                                        { "name": "Eleazar",
+                                                                                                          "children": [
+                                                                                                            { "name": "Phinehas" }
+                                                                                                          ]
+                                                                                                        }
+                                                                                                      ]
+                                                                                                    },
+                                                                                                    { "name": "Miriam" }
+                                                                                                  ]
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        },
+                                                                                        { "name": "Judah",
+                                                                                          "children": [
+                                                                                            { "name": "Perez",
+                                                                                              "children": [
+                                                                                                { "name": "Hezron",
+                                                                                                  "children": [
+                                                                                                    { "name": "Ram",
+                                                                                                      "children": [
+                                                                                                        { "name": "Amminadab",
+                                                                                                          "children": [
+                                                                                                            { "name": "Nahshon",
+                                                                                                              "children": [
+                                                                                                                { "name": "Salmon",
+                                                                                                                  "children": [
+                                                                                                                    { "name": "Boaz",
+                                                                                                                      "children": [
+                                                                                                                        { "name": "Obed",
+                                                                                                                          "children": [
+                                                                                                                            { "name": "Jesse",
+                                                                                                                              "children": [
+                                                                                                                                { "name": "David",
+                                                                                                                                  "children": [
+                                                                                                                                    { "name": "Solomon",
+                                                                                                                                      "children": [
+                                                                                                                                        { "name": "Rehoboam",
+                                                                                                                                          "children": [
+                                                                                                                                            { "name": "Abijah",
+                                                                                                                                              "children": [
+                                                                                                                                                { "name": "Asa",
+                                                                                                                                                  "children": [
+                                                                                                                                                    { "name": "Jehoshaphat",
+                                                                                                                                                      "children": [
+                                                                                                                                                        { "name": "Jehoram",
+                                                                                                                                                          "children": [
+                                                                                                                                                            { "name": "Uzziah",
+                                                                                                                                                              "children": [
+                                                                                                                                                                { "name": "Jotham",
+                                                                                                                                                                  "children": [
+                                                                                                                                                                    { "name": "Ahaz",
+                                                                                                                                                                      "children": [
+                                                                                                                                                                        { "name": "Hezekiah",
+                                                                                                                                                                          "children": [
+                                                                                                                                                                            { "name": "Manasseh",
+                                                                                                                                                                              "children": [
+                                                                                                                                                                                { "name": "Amon",
+                                                                                                                                                                                  "children": [
+                                                                                                                                                                                    { "name": "Josiah",
+                                                                                                                                                                                      "children": [
+                                                                                                                                                                                        { "name": "Jeconiah",
+                                                                                                                                                                                          "children": [
+                                                                                                                                                                                            { "name": "Shealtiel",
+                                                                                                                                                                                              "children": [
+                                                                                                                                                                                                { "name": "Zerubbabel",
+                                                                                                                                                                                                  "children": [
+                                                                                                                                                                                                    { "name": "Abiud",
+                                                                                                                                                                                                      "children": [
+                                                                                                                                                                                                        { "name": "Eliakim",
+                                                                                                                                                                                                          "children": [
+                                                                                                                                                                                                            { "name": "Azor",
+                                                                                                                                                                                                              "children": [
+                                                                                                                                                                                                                { "name": "Zadok",
+                                                                                                                                                                                                                  "children": [
+                                                                                                                                                                                                                    { "name": "Achim",
+                                                                                                                                                                                                                      "children": [
+                                                                                                                                                                                                                        { "name": "Eliud",
+                                                                                                                                                                                                                          "children": [
+                                                                                                                                                                                                                            { "name": "Eleazar",
+                                                                                                                                                                                                                              "children": [
+                                                                                                                                                                                                                                { "name": "Matthan",
+                                                                                                                                                                                                                                  "children": [
+                                                                                                                                                                                                                                    { "name": "Jacob",
+                                                                                                                                                                                                                                      "children": [
+                                                                                                                                                                                                                                        { "name": "Joseph (husband of Mary)",
+                                                                                                                                                                                                                                          "children": [
+                                                                                                                                                                                                                                            { "name": "Jesus" }
+                                                                                                                                                                                                                                          ]
+                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                      ]
+                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                  ]
+                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                              ]
+                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                          ]
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                      ]
+                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                  ]
+                                                                                                                                                                                                                }
+                                                                                                                                                                                                              ]
+                                                                                                                                                                                                            }
+                                                                                                                                                                                                          ]
+                                                                                                                                                                                                        }
+                                                                                                                                                                                                      ]
+                                                                                                                                                                                                    }
+                                                                                                                                                                                                  ]
+                                                                                                                                                                                                }
+                                                                                                                                                                                              ]
+                                                                                                                                                                                            }
+                                                                                                                                                                                          ]
+                                                                                                                                                                                        }
+                                                                                                                                                                                      ]
+                                                                                                                                                                                    }
+                                                                                                                                                                                  ]
+                                                                                                                                                                                }
+                                                                                                                                                                              ]
+                                                                                                                                                                            }
+                                                                                                                                                                          ]
+                                                                                                                                                                        }
+                                                                                                                                                                      ]
+                                                                                                                                                                    }
+                                                                                                                                                                  ]
+                                                                                                                                                                }
+                                                                                                                                                              ]
+                                                                                                                                                            }
+                                                                                                                                                          ]
+                                                                                                                                                        }
+                                                                                                                                                      ]
+                                                                                                                                                    }
+                                                                                                                                                  ]
+                                                                                                                                                }
+                                                                                                                                              ]
+                                                                                                                                            }
+                                                                                                                                          ]
+                                                                                                                                        }
+                                                                                                                                      ]
+                                                                                                                                    }
+                                                                                                                                  ]
+                                                                                                                                }
+                                                                                                                              ]
+                                                                                                                            }
+                                                                                                                          ]
+                                                                                                                        }
+                                                                                                                      ]
+                                                                                                                    }
+                                                                                                                  ]
+                                                                                                                }
+                                                                                                              ]
+                                                                                                            }
+                                                                                                          ]
+                                                                                                        }
+                                                                                                      ]
+                                                                                                    }
+                                                                                                  ]
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        },
+                                                                                        { "name": "Dan" },
+                                                                                        { "name": "Naphtali" },
+                                                                                        { "name": "Gad" },
+                                                                                        { "name": "Asher" },
+                                                                                        { "name": "Issachar" },
+                                                                                        { "name": "Zebulun" },
+                                                                                        { "name": "Joseph",
+                                                                                          "children": [
+                                                                                            { "name": "Ephraim" },
+                                                                                            { "name": "Manasseh" }
+                                                                                          ]
+                                                                                        },
+                                                                                        { "name": "Benjamin" }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                },
+                                                                                {
+                                                                                  "name": "Ishmael",
+                                                                                  "children": [
+                                                                                    { "name": "Nebaioth" },
+                                                                                    { "name": "Kedar" },
+                                                                                    { "name": "Adbeel" },
+                                                                                    { "name": "Mibsam" },
+                                                                                    { "name": "Mishma" },
+                                                                                    { "name": "Dumah" },
+                                                                                    { "name": "Massa" },
+                                                                                    { "name": "Hadad" },
+                                                                                    { "name": "Tema" },
+                                                                                    { "name": "Jetur" },
+                                                                                    { "name": "Naphish" },
+                                                                                    { "name": "Kedemah" }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "name": "Ham",
+                                          "children": [
+                                            { "name": "Cush",
+                                              "children": [
+                                                { "name": "Nimrod" },
+                                                { "name": "Seba" },
+                                                { "name": "Havilah" },
+                                                { "name": "Sabtah" },
+                                                { "name": "Raamah",
+                                                  "children": [
+                                                    { "name": "Sheba" },
+                                                    { "name": "Dedan" }
+                                                  ]
+                                                },
+                                                { "name": "Sabteca" }
+                                              ]
+                                            },
+                                            { "name": "Mizraim",
+                                              "children": [
+                                                { "name": "Ludim" },
+                                                { "name": "Anamim" },
+                                                { "name": "Lehabim" },
+                                                { "name": "Naphtuhim" },
+                                                { "name": "Pathrusim" },
+                                                { "name": "Casluhim" },
+                                                { "name": "Caphtorim" }
+                                              ]
+                                            },
+                                            { "name": "Phut" },
+                                            { "name": "Canaan",
+                                              "children": [
+                                                { "name": "Sidon" },
+                                                { "name": "Heth" },
+                                                { "name": "Jebusites" },
+                                                { "name": "Amorites" },
+                                                { "name": "Girgashites" },
+                                                { "name": "Hivites" },
+                                                { "name": "Arkites" },
+                                                { "name": "Sinites" },
+                                                { "name": "Arvadites" },
+                                                { "name": "Zemarites" },
+                                                { "name": "Hamathites" }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "name": "Japheth",
+                                          "children": [
+                                            { "name": "Gomer",
+                                              "children": [
+                                                { "name": "Ashkenaz" },
+                                                { "name": "Riphath" },
+                                                { "name": "Togarmah" }
+                                              ]
+                                            },
+                                            { "name": "Magog" },
+                                            { "name": "Madai" },
+                                            { "name": "Javan",
+                                              "children": [
+                                                { "name": "Elishah" },
+                                                { "name": "Tarshish" },
+                                                { "name": "Kittim" },
+                                                { "name": "Dodanim" }
+                                              ]
+                                            },
+                                            { "name": "Tubal" },
+                                            { "name": "Meshech" },
+                                            { "name": "Tiras" }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    { "name": "Cain",
+      "children": [
+        { "name": "Enoch" },
+        { "name": "Irad" },
+        { "name": "Mehujael" },
+        { "name": "Methushael" },
+        { "name": "Lamech",
+          "children": [
+            { "name": "Jabal" },
+            { "name": "Jubal" },
+            { "name": "Tubal-cain" },
+            { "name": "Naamah" }
+          ]
+        }
+      ]
+    },
+    { "name": "Abel" }
+  ]
+}

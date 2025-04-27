@@ -1,0 +1,6 @@
+# Ignore node_modules and cache directories
+node_modules/
+.cache/
+dist/
+.env
+*.log
