@@ -127,34 +127,38 @@ function MindmapInner() {
   }, []);
 
   return (
-    <div className="w-full h-[80vh] bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl shadow-lg p-2 relative overflow-hidden">
-      <div className="absolute top-2 left-2 z-20 w-64 max-w-full">
+    <div className="w-full h-[80vh] bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl shadow-lg p-2 relative overflow-hidden flex flex-col">
+      {/* Responsive search bar */}
+      <div className="w-full flex justify-center items-center z-20 px-2 pt-2 md:absolute md:top-2 md:left-2 md:w-64 md:max-w-full">
         <input
-          className="w-full px-3 py-2 rounded-lg border border-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-lg shadow"
+          className="w-full px-3 py-2 rounded-lg border border-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-lg shadow bg-white"
           type="text"
           placeholder="Search descendant..."
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
       </div>
-      <div className="absolute top-2 right-2 z-20"><ColorLegend /></div>
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        fitView
-        onNodeClick={onNodeClick}
-        minZoom={0.1}
-        maxZoom={2}
-        panOnScroll
-      >
-        <MiniMap />
-        <Controls />
-        <Background gap={16} />
-      </ReactFlow>
-      <NodeDetailsModal node={selectedNode} onClose={() => setSelectedNode(null)} />
-      {search && nodes.length === 0 && (
-        <div className="absolute top-20 left-1/2 -translate-x-1/2 bg-white/90 rounded px-4 py-2 shadow text-lg text-red-600">No descendant found.</div>
-      )}
+      {/* Responsive legend */}
+      <div className="w-full flex justify-center items-center mt-2 md:absolute md:top-2 md:right-2 md:w-auto md:mt-0 z-20"><ColorLegend /></div>
+      <div className="flex-1 min-h-0 min-w-0 relative mt-2 md:mt-0">
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          fitView
+          onNodeClick={onNodeClick}
+          minZoom={0.1}
+          maxZoom={2}
+          panOnScroll
+        >
+          <MiniMap />
+          <Controls />
+          <Background gap={16} />
+        </ReactFlow>
+        <NodeDetailsModal node={selectedNode} onClose={() => setSelectedNode(null)} />
+        {search && nodes.length === 0 && (
+          <div className="absolute top-20 left-1/2 -translate-x-1/2 bg-white/90 rounded px-4 py-2 shadow text-lg text-red-600">No descendant found.</div>
+        )}
+      </div>
     </div>
   );
 }
