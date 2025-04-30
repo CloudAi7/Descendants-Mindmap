@@ -27,7 +27,7 @@ const getNodeColor = (name, parentName) => {
 // Debounce utility
 function useDebouncedValue(value, delay) {
   const [debounced, setDebounced] = useState(value);
-  React.useEffect(() => {
+  useEffect(() => {
     const handler = setTimeout(() => setDebounced(value), delay);
     return () => clearTimeout(handler);
   }, [value, delay]);
@@ -59,7 +59,6 @@ function findSubtreeByName(node, searchTerm) {
 
 // Convert descendantsData to nodes and edges for React Flow
 const generateNodesAndEdges = (data, searchTerm = '') => {
-  // If searching, focus on the subtree from the first matching node
   let treeRoot = data;
   if (searchTerm) {
     const found = findSubtreeByName(data, searchTerm);
@@ -114,44 +113,24 @@ function MindmapInner() {
   const [selectedNode, setSelectedNode] = useState(null);
   const { nodes, edges } = useMemo(() => generateNodesAndEdges(descendantsData, debouncedSearch), [debouncedSearch]);
 
-  // --- Fit view on search change and highlight found node ---
+  // Fit view on search change and highlight found node
   const reactFlowInstance = useReactFlow();
   useEffect(() => {
-    if (debouncedSearch && nodes.length > 0 && reactFlowInstance && reactFlowInstance.fitView) {
-      // Find the node and its path
+    if (debouncedSearch && nodes.length > 0 && reactFlowInstance) {
       const found = findSubtreeByName(descendantsData, debouncedSearch);
       if (found) {
-        const path = buildSearchPath(found, descendantsData);
-        setSearchPath(path);
         setFoundNode(found);
-        
-        // Center the found node with animation
+        setSearchPath(buildSearchPath(found, descendantsData));
         setTimeout(() => {
           const node = nodes.find(n => n.data.label === found.name);
-          if (node && reactFlowInstance) {
-            const nodeEl = document.querySelector(`[data-id="${node.id}"]`);
-            if (nodeEl) {
-              const rect = nodeEl.getBoundingClientRect();
-              const container = reactFlowInstance.getContainer();
-              const containerRect = container.getBoundingClientRect();
-              
-              // Calculate position to center the node
-              const x = rect.left - containerRect.left - containerRect.width / 2;
-              const y = rect.top - containerRect.top - containerRect.height / 2;
-              
-              // Center the node with padding
-              reactFlowInstance.setViewport({
-                x: -x,
-                y: -y,
-                zoom: 1,
-                duration: 500
-              });
-            }
+          if (node) {
+            reactFlowInstance.fitView({ nodes: [node], padding: 0.5, duration: 500 });
           }
         }, 300);
       } else {
         setSearchPath([]);
         setFoundNode(null);
+        reactFlowInstance.fitView({ padding: 0.5, duration: 500 });
       }
     }
   }, [debouncedSearch, nodes, reactFlowInstance]);
@@ -178,7 +157,6 @@ function MindmapInner() {
       return {
         border: '4px solid #fde047',
         boxShadow: '0 0 20px rgba(253, 224, 71, 0.7)',
-        transition: 'all 0.5s ease',
         transform: 'scale(1.05)',
         background: '#fff',
         zIndex: 10
@@ -192,30 +170,30 @@ function MindmapInner() {
   }, []);
 
   return (
-    <div className="w-full h-[80vh] bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl shadow-lg p-2 relative overflow-hidden flex flex-col" style={{ minHeight: '60vh', minHeight: 'calc(var(--vh, 1vh) * 80)' }}>
-      {/* Responsive search bar */}
-      <div className="w-full flex justify-center items-center z-20 px-2 pt-2 md:absolute md:top-2 md:left-2 md:w-64 md:max-w-full">
+    <div className="w-full h-[90vh] bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl shadow-2xl p-4 relative overflow-hidden flex flex-col">
+      {/* Search bar */}
+      <div className="w-full max-w-md mx-auto mb-4 z-20">
         <input
-          className="w-full px-3 py-2 rounded-lg border border-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-lg shadow bg-white"
+          className="w-full px-4 py-3 rounded-lg border border-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-lg shadow-md bg-white transition-all duration-300"
           type="text"
           placeholder="Search descendant..."
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
       </div>
-      
+
       {/* Search result indicator */}
       {foundNode && (
         <div className="fixed inset-0 z-40 flex items-center justify-center pointer-events-none">
-          <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-xl max-w-sm w-full mx-4">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-8 h-8 rounded-full bg-yellow-400 flex items-center justify-center">
-                <svg className="w-5 h-5 text-yellow-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="bg-white/90 backdrop-blur-md rounded-2xl p-6 shadow-2xl max-w-md w-full mx-4">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center">
+                <svg className="w-6 h-6 text-yellow-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
                 </svg>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-yellow-800">Found: {foundNode.name}</h3>
+                <h3 className="text-xl font-semibold text-yellow-800">Found: {foundNode.name}</h3>
                 {searchPath.length > 1 && (
                   <p className="text-sm text-gray-600 mt-1">
                     Path: {searchPath.join(' → ')}
@@ -224,22 +202,23 @@ function MindmapInner() {
               </div>
             </div>
             <div className="flex justify-center">
-              <div className="w-40 h-1 bg-yellow-400 rounded-full" />
+              <div className="w-48 h-1 bg-yellow-400 rounded-full" />
             </div>
           </div>
         </div>
       )}
 
-      {/* Responsive legend */}
-      <div className="w-full flex justify-center items-center mt-2 md:absolute md:top-2 md:right-2 md:w-auto md:mt-0 z-20"><ColorLegend /></div>
-      <div className="flex-1 min-h-0 min-w-0 relative mt-2 md:mt-0">
+      {/* Legend */}
+      <div className="w-full max-w-xs mx-auto mb-4 z-20"><ColorLegend /></div>
+
+      {/* React Flow */}
+      <div className="flex-1 min-h-0 min-w-0 relative">
         <ReactFlow
           nodes={nodes.map(node => ({
             ...node,
             style: {
               ...node.style,
               ...getSearchPathStyle(node.data.label),
-              transition: 'all 0.5s ease'
             }
           }))}
           edges={edges}
@@ -248,9 +227,8 @@ function MindmapInner() {
           minZoom={0.1}
           maxZoom={2}
           panOnScroll
-          style={{
-            transition: 'all 0.5s ease'
-          }}
+          style={{ transition: 'all 0.5s ease' }}
+          preventScrolling={false}
         >
           <MiniMap />
           <Controls />
@@ -258,7 +236,9 @@ function MindmapInner() {
         </ReactFlow>
         <NodeDetailsModal node={selectedNode} onClose={() => setSelectedNode(null)} />
         {search && nodes.length === 0 && (
-          <div className="absolute top-20 left-1/2 -translate-x-1/2 bg-white/90 rounded px-4 py-2 shadow text-lg text-red-600">No descendant found.</div>
+          <div className="absolute top-20 left-1/2 -translate-x-1/2 bg-white/90 rounded-lg px-4 py-2 shadow-lg text-lg text-red-600">
+            No descendant found.
+          </div>
         )}
       </div>
     </div>
