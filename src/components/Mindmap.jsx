@@ -108,21 +108,67 @@ const generateNodesAndEdges = (data, searchTerm = '') => {
 
 function MindmapInner() {
   const [search, setSearch] = useState('');
+  const [foundNode, setFoundNode] = useState(null);
+  const [searchPath, setSearchPath] = useState([]);
   const debouncedSearch = useDebouncedValue(search, 200);
   const [selectedNode, setSelectedNode] = useState(null);
   const { nodes, edges } = useMemo(() => generateNodesAndEdges(descendantsData, debouncedSearch), [debouncedSearch]);
 
-  // --- Fit view on search change, but avoid iOS zoom bug ---
+  // --- Fit view on search change and highlight found node ---
   const reactFlowInstance = useReactFlow();
   useEffect(() => {
-    // Only auto-fit if search term changed (not every node/edge change)
     if (debouncedSearch && nodes.length > 0 && reactFlowInstance && reactFlowInstance.fitView) {
-      // iOS keyboard/viewport bug workaround: slight delay
-      setTimeout(() => {
-        reactFlowInstance.fitView({ padding: 0.15 });
-      }, 200);
+      // Find the node and its path
+      const found = findSubtreeByName(descendantsData, debouncedSearch);
+      if (found) {
+        const path = buildSearchPath(found, descendantsData);
+        setSearchPath(path);
+        setFoundNode(found);
+        
+        // Center the found node with animation
+        setTimeout(() => {
+          const node = nodes.find(n => n.data.label === found.name);
+          if (node) {
+            reactFlowInstance.fitView({
+              padding: 0.2,
+              nodes: [node.id]
+            });
+          }
+        }, 200);
+      } else {
+        setSearchPath([]);
+        setFoundNode(null);
+      }
     }
-  }, [debouncedSearch, nodes.length, reactFlowInstance]);
+  }, [debouncedSearch, nodes, reactFlowInstance]);
+
+  // Build the search path from root to found node
+  const buildSearchPath = (node, data) => {
+    const path = [node.name];
+    let current = node;
+    while (current.parent) {
+      const parent = findSubtreeByName(data, current.parent);
+      if (parent) {
+        path.unshift(parent.name);
+        current = parent;
+      } else {
+        break;
+      }
+    }
+    return path;
+  };
+
+  // Style for search path nodes
+  const getSearchPathStyle = (nodeName) => {
+    if (searchPath.includes(nodeName)) {
+      return {
+        border: '2px solid #fde047',
+        boxShadow: '0 0 10px rgba(253, 224, 71, 0.5)',
+        transition: 'all 0.3s ease'
+      };
+    }
+    return {};
+  };
 
   const onNodeClick = useCallback((event, node) => {
     setSelectedNode(node);
@@ -140,11 +186,31 @@ function MindmapInner() {
           onChange={e => setSearch(e.target.value)}
         />
       </div>
+      
+      {/* Search result indicator */}
+      {foundNode && (
+        <div className="absolute top-2 right-2 bg-white/90 rounded-lg p-2 shadow-md text-sm">
+          Found: {foundNode.name}
+          {searchPath.length > 1 && (
+            <div className="mt-1 text-xs text-gray-600">
+              Path: {searchPath.join(' → ')}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Responsive legend */}
       <div className="w-full flex justify-center items-center mt-2 md:absolute md:top-2 md:right-2 md:w-auto md:mt-0 z-20"><ColorLegend /></div>
       <div className="flex-1 min-h-0 min-w-0 relative mt-2 md:mt-0">
         <ReactFlow
-          nodes={nodes}
+          nodes={nodes.map(node => ({
+            ...node,
+            style: {
+              ...node.style,
+              ...getSearchPathStyle(node.data.label),
+              transition: 'all 0.3s ease'
+            }
+          }))}
           edges={edges}
           fitView
           onNodeClick={onNodeClick}
