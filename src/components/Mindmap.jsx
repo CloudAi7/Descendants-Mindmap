@@ -128,13 +128,27 @@ function MindmapInner() {
         // Center the found node with animation
         setTimeout(() => {
           const node = nodes.find(n => n.data.label === found.name);
-          if (node) {
-            reactFlowInstance.fitView({
-              padding: 0.2,
-              nodes: [node.id]
-            });
+          if (node && reactFlowInstance) {
+            const nodeEl = document.querySelector(`[data-id="${node.id}"]`);
+            if (nodeEl) {
+              const rect = nodeEl.getBoundingClientRect();
+              const container = reactFlowInstance.getContainer();
+              const containerRect = container.getBoundingClientRect();
+              
+              // Calculate position to center the node
+              const x = rect.left - containerRect.left - containerRect.width / 2;
+              const y = rect.top - containerRect.top - containerRect.height / 2;
+              
+              // Center the node with padding
+              reactFlowInstance.setViewport({
+                x: -x,
+                y: -y,
+                zoom: 1,
+                duration: 500
+              });
+            }
           }
-        }, 200);
+        }, 300);
       } else {
         setSearchPath([]);
         setFoundNode(null);
@@ -162,9 +176,12 @@ function MindmapInner() {
   const getSearchPathStyle = (nodeName) => {
     if (searchPath.includes(nodeName)) {
       return {
-        border: '2px solid #fde047',
-        boxShadow: '0 0 10px rgba(253, 224, 71, 0.5)',
-        transition: 'all 0.3s ease'
+        border: '4px solid #fde047',
+        boxShadow: '0 0 20px rgba(253, 224, 71, 0.7)',
+        transition: 'all 0.5s ease',
+        transform: 'scale(1.05)',
+        background: '#fff',
+        zIndex: 10
       };
     }
     return {};
@@ -189,13 +206,27 @@ function MindmapInner() {
       
       {/* Search result indicator */}
       {foundNode && (
-        <div className="absolute top-2 right-2 bg-white/90 rounded-lg p-2 shadow-md text-sm">
-          Found: {foundNode.name}
-          {searchPath.length > 1 && (
-            <div className="mt-1 text-xs text-gray-600">
-              Path: {searchPath.join(' → ')}
+        <div className="fixed inset-0 z-40 flex items-center justify-center pointer-events-none">
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-xl max-w-sm w-full mx-4">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-8 h-8 rounded-full bg-yellow-400 flex items-center justify-center">
+                <svg className="w-5 h-5 text-yellow-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-yellow-800">Found: {foundNode.name}</h3>
+                {searchPath.length > 1 && (
+                  <p className="text-sm text-gray-600 mt-1">
+                    Path: {searchPath.join(' → ')}
+                  </p>
+                )}
+              </div>
             </div>
-          )}
+            <div className="flex justify-center">
+              <div className="w-40 h-1 bg-yellow-400 rounded-full" />
+            </div>
+          </div>
         </div>
       )}
 
@@ -208,7 +239,7 @@ function MindmapInner() {
             style: {
               ...node.style,
               ...getSearchPathStyle(node.data.label),
-              transition: 'all 0.3s ease'
+              transition: 'all 0.5s ease'
             }
           }))}
           edges={edges}
@@ -217,6 +248,9 @@ function MindmapInner() {
           minZoom={0.1}
           maxZoom={2}
           panOnScroll
+          style={{
+            transition: 'all 0.5s ease'
+          }}
         >
           <MiniMap />
           <Controls />
