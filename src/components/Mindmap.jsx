@@ -113,7 +113,7 @@ function MindmapInner() {
   const [selectedNode, setSelectedNode] = useState(null);
   const { nodes, edges } = useMemo(() => generateNodesAndEdges(descendantsData, debouncedSearch), [debouncedSearch]);
 
-  // Fit view on search change and highlight found node
+  // Center and zoom on searched node
   const reactFlowInstance = useReactFlow();
   useEffect(() => {
     if (debouncedSearch && nodes.length > 0 && reactFlowInstance) {
@@ -124,7 +124,15 @@ function MindmapInner() {
         setTimeout(() => {
           const node = nodes.find(n => n.data.label === found.name);
           if (node) {
-            reactFlowInstance.fitView({ nodes: [node], padding: 0.5, duration: 500 });
+            const { x, y } = node.position;
+            const zoom = 1.5; // Zoom level for prominence
+            const viewport = reactFlowInstance.getViewport();
+            const container = reactFlowInstance.getContainer();
+            const containerRect = container.getBoundingClientRect();
+            // Center the node in the viewport
+            const centerX = x - containerRect.width / (2 * zoom);
+            const centerY = y - containerRect.height / (2 * zoom);
+            reactFlowInstance.setViewport({ x: -centerX * zoom, y: -centerY * zoom, zoom, duration: 500 });
           }
         }, 300);
       } else {
@@ -157,7 +165,7 @@ function MindmapInner() {
       return {
         border: '4px solid #fde047',
         boxShadow: '0 0 20px rgba(253, 224, 71, 0.7)',
-        transform: 'scale(1.05)',
+        transform: 'scale(1.1)', // Slightly larger scale for prominence
         background: '#fff',
         zIndex: 10
       };
@@ -185,6 +193,7 @@ function MindmapInner() {
       {/* Search result indicator */}
       {foundNode && (
         <div className="fixed inset-0 z-40 flex items-center justify-center pointer-events-none">
+atibus
           <div className="bg-white/90 backdrop-blur-md rounded-2xl p-6 shadow-2xl max-w-md w-full mx-4">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center">
