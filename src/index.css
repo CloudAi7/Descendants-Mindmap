@@ -5,3 +5,14 @@
 body {
   font-family: 'Inter', sans-serif;
 }
+
+/* iOS 100vh fix: set --vh to window.innerHeight * 0.01 */
+:root {
+  --vh: 1vh;
+}
+
+.full-mobile-screen {
+  min-height: calc(var(--vh, 1vh) * 100);
+  min-height: 100dvh;
+  /* fallback for browsers that support dvh */
+}

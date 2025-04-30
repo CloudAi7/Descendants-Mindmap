@@ -112,22 +112,24 @@ function MindmapInner() {
   const [selectedNode, setSelectedNode] = useState(null);
   const { nodes, edges } = useMemo(() => generateNodesAndEdges(descendantsData, debouncedSearch), [debouncedSearch]);
 
-  // --- Fit view on search change ---
+  // --- Fit view on search change, but avoid iOS zoom bug ---
   const reactFlowInstance = useReactFlow();
   useEffect(() => {
-    if (nodes.length > 0 && reactFlowInstance && reactFlowInstance.fitView) {
+    // Only auto-fit if search term changed (not every node/edge change)
+    if (debouncedSearch && nodes.length > 0 && reactFlowInstance && reactFlowInstance.fitView) {
+      // iOS keyboard/viewport bug workaround: slight delay
       setTimeout(() => {
         reactFlowInstance.fitView({ padding: 0.15 });
-      }, 50);
+      }, 200);
     }
-  }, [nodes, edges, reactFlowInstance]);
+  }, [debouncedSearch, nodes.length, reactFlowInstance]);
 
   const onNodeClick = useCallback((event, node) => {
     setSelectedNode(node);
   }, []);
 
   return (
-    <div className="w-full h-[80vh] bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl shadow-lg p-2 relative overflow-hidden flex flex-col">
+    <div className="w-full h-[80vh] bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl shadow-lg p-2 relative overflow-hidden flex flex-col" style={{ minHeight: '60vh', minHeight: 'calc(var(--vh, 1vh) * 80)' }}>
       {/* Responsive search bar */}
       <div className="w-full flex justify-center items-center z-20 px-2 pt-2 md:absolute md:top-2 md:left-2 md:w-64 md:max-w-full">
         <input
